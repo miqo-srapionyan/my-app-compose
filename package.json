@@ -1,0 +1,16 @@
+{
+  "name": "triangle-of-knowledge",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "docker:build": "docker-compose build --no-cache",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "start": "npm run generate:env && npm run docker:build && npm run docker:up",
+    "generate:env": "node generate-env.js",
+    "clone:frontend": "git clone https://github.com/miqo-srapionyan/my-app.git",
+    "clone:backend": "git clone https://github.com/miqo-srapionyan/my-app-api.git",
+    "clone": "npm run clone:backend && npm run clone:frontend"
+  },
+  "dependencies": {}
+}

@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./my-app-api  # Path to the directory containing the backend Dockerfile
+      dockerfile: Dockerfile
+    container_name: backend
+    restart: always
+    volumes:
+      - ./my-app-api:/app
+    command: npm run start
+    ports:
+      - "5000:5000"
+    environment:
+      PORT: ${PORT}
+      MONGO_URI: ${MONGO_URI}
+    depends_on:
+      - mongo
+    networks:
+      - nestjs-mongo-network
+    env_file:
+      - ./my-app-api/.env
+
+  frontend:
+    build:
+      context: ./my-app  # Path to the directory containing the frontend Dockerfile
+      dockerfile: Dockerfile
+    container_name: frontend
+    restart: always
+    volumes:
+      - ./my-app:/app
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+    networks:
+      - nestjs-mongo-network
+
+  mongo:
+    image: mongo:5
+    container_name: mongodb
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - nestjs-mongo-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  nestjs-mongo-network:
+    driver: bridge
