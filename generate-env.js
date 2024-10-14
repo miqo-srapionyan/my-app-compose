@@ -5,17 +5,17 @@ const crypto = require('crypto');
 // Define the paths
 const backendEnvSource = '.env.backend';
 const frontendEnvSource = '.env.client';
-const backendTargetDir = 'my-app-api/.env';
-const frontendTargetDir = 'my-app/.env';
+const backendTargetDir = 'triangle-of-knowledge-api/.env';
+const frontendTargetDir = 'triangle-of-knowledge-client/.env';
 
 // Check if the directories exist before copying
-if (!fs.existsSync('my-app-api')) {
-  console.error("Error: 'my-app-api' directory not found. Ensure the repository is cloned.");
+if (!fs.existsSync('triangle-of-knowledge-api')) {
+  console.error("Error: 'triangle-of-knowledge-api' directory not found. Ensure the repository is cloned.");
   process.exit(1);
 }
 
-if (!fs.existsSync('my-app')) {
-  console.error("Error: 'my-app' directory not found. Ensure the repository is cloned.");
+if (!fs.existsSync('triangle-of-knowledge-client')) {
+  console.error("Error: 'triangle-of-knowledge-client' directory not found. Ensure the repository is cloned.");
   process.exit(1);
 }
 

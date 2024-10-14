@@ -3,12 +3,10 @@ version: '3.8'
 services:
   backend:
     build:
-      context: ./my-app-api  # Path to the directory containing the backend Dockerfile
+      context: ./triangle-of-knowledge-api
       dockerfile: Dockerfile
     container_name: backend
     restart: always
-    volumes:
-      - ./my-app-api:/app
     command: npm run start
     ports:
       - "5000:5000"
@@ -20,16 +18,14 @@ services:
     networks:
       - nestjs-mongo-network
     env_file:
-      - ./my-app-api/.env
+      - ./triangle-of-knowledge-api/.env
 
   frontend:
     build:
-      context: ./my-app  # Path to the directory containing the frontend Dockerfile
+      context: ./triangle-of-knowledge-client
       dockerfile: Dockerfile
     container_name: frontend
     restart: always
-    volumes:
-      - ./my-app:/app
     ports:
       - "3000:3000"
     environment:
